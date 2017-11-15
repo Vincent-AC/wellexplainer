@@ -13,7 +13,7 @@
 abbreviation_to_full_atb_name <-
   function(string_to_change, language = "English") {
     library(dplyr)
-    lexicon <- data.frame(matrix(ncol = 3, nrow = 12))
+    lexicon <- data.frame(matrix(ncol = 3, nrow = 13))
     lexicon[, 1] <-
       c("tei",
         "chl",
@@ -26,7 +26,8 @@ abbreviation_to_full_atb_name <-
         "fos",
         "pmb",
         "amk",
-        "lin")
+        "lin",
+        "atm")
     lexicon[, 2] <-
       c(
         "Teicoplanin",
@@ -40,7 +41,8 @@ abbreviation_to_full_atb_name <-
         "Fosfomycin",
         "Polymyxin B",
         "Amikacin",
-        "Linezolid"
+        "Linezolid",
+        "Aztreonam"
       )
     lexicon[, 3] <-
       c(
@@ -55,7 +57,8 @@ abbreviation_to_full_atb_name <-
         "Fosfomycine",
         "Polymyxine B",
         "Amikacine",
-        "Linezolide"
+        "Linezolide",
+        "Aztreonam"
       )
     
     names(lexicon) <- c("Abbreviation", "English", "French")

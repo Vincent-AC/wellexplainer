@@ -4,12 +4,14 @@
 \alias{geomSeries}
 \title{Geometric series}
 \usage{
-geomSeries(base, max)
+geomSeries(base, max, n = 10)
 }
 \arguments{
 \item{base}{Base of the series}
 
 \item{max}{The maximum value of the series}
+
+\item{n}{The length of the series}
 }
 \description{
 A function that given a base and a maximum value will calculate all the terms of 

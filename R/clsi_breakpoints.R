@@ -1,7 +1,7 @@
-#' Determine EUCAST sensitivity
+#' Determine CLSI sensitivity
 #'
 #' This function given a data.frame with MIC will add a column to this table
-#' giving the corresponding EUCAST sensitivity (Sensitive, Intermediate or Resistant)
+#' giving the corresponding CLSI sensitivity (Sensitive, Intermediate or Resistant)
 #'
 #' @param MIC.table data.frame having MIC in one column. If multiple MIC are given
 #' in one row they must be separated by separator
@@ -14,8 +14,8 @@
 #' @keywords placeholder
 #' @export
 #' @examples
-#' eucast_breakpoints()
-eucast_breakpoints <-
+#' clsi_breakpoints()
+clsi_breakpoints <-
   function(MIC.table,
            separator = " - ",
            species = "Acinetobacter",
@@ -23,19 +23,19 @@ eucast_breakpoints <-
            ATB.column = 1) {
     if (species == "Acinetobacter")
     {
-      EUCAST.sensitivity <- NULL
+      CLSI.sensitivity <- NULL
       result <- MIC.table
       result[, (length(MIC.table) + 1)] <- "a"
       for (i in 1:nrow(MIC.table))
       {
-        if (sum(eucast.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column]) == 0)
+        if (sum(clsi.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column]) == 0)
         {
           result[i, (length(MIC.table) + 1)] <-
-            "Antibiotic not found in EUCAST tables"
+            "Antibiotic not found in CLSI tables"
         }
-        else if (is.na(eucast.breakpoints.acinetobacter[eucast.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column], 2]))
+        else if (is.na(clsi.breakpoints.acinetobacter[clsi.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column], 2]))
         {
-          result[i, (length(MIC.table) + 1)] <- "No cutoff set by EUCAST"
+          result[i, (length(MIC.table) + 1)] <- "No cutoff set by CLSI"
         }
         else
         {
@@ -50,7 +50,7 @@ eucast_breakpoints <-
               grepl("Negative control problem", MIC.value[j])
             ) > 0)
             {
-              EUCAST.sensitivity[j] <- "No MIC value"
+              CLSI.sensitivity[j] <- "No MIC value"
             }
             
             if (sum(
@@ -63,29 +63,29 @@ eucast_breakpoints <-
               temp.MIC <- 0
               temp.MIC <-
                 as.numeric(MIC.value[j])
-              if (temp.MIC <= eucast.breakpoints.acinetobacter[(eucast.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column]), 2])
+              if (temp.MIC <= clsi.breakpoints.acinetobacter[(clsi.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column]), 2])
               {
-                EUCAST.sensitivity[j] <- "Sensitive"
+                CLSI.sensitivity[j] <- "Sensitive"
                 
               }
-              else if (temp.MIC > eucast.breakpoints.acinetobacter[eucast.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column], 3])
+              else if (temp.MIC > clsi.breakpoints.acinetobacter[clsi.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column], 3])
               {
-                EUCAST.sensitivity[j] <- "Resistant"
+                CLSI.sensitivity[j] <- "Resistant"
               }
-              else if (temp.MIC <= eucast.breakpoints.acinetobacter[eucast.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column], 3] &
-                       temp.MIC > eucast.breakpoints.acinetobacter[eucast.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column], 2])
+              else if (temp.MIC <= clsi.breakpoints.acinetobacter[clsi.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column], 3] &
+                       temp.MIC > clsi.breakpoints.acinetobacter[clsi.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column], 2])
               {
-                EUCAST.sensitivity[j] <- "Intermediate"
+                CLSI.sensitivity[j] <- "Intermediate"
               }
             }
           }
           result[i, (length(MIC.table) + 1)] <-
-            paste0(EUCAST.sensitivity, collapse = separator)
+            paste0(CLSI.sensitivity, collapse = separator)
         }
       }
       
     }
     colnames(result)[(length(MIC.table) + 1)] <-
-      "EUCAST Sensitivity"
+      "CLSI Sensitivity"
     return(result)
   }

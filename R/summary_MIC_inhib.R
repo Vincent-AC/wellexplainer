@@ -68,8 +68,10 @@ summary_MIC_inhib <- function(inhib_data_list,
     names(result_summary_strain) <- c("ATB", "MIC")
     result_summary_strain <-
       result_summary_strain[order(result_summary_strain[, 1]),]
-    result_summary_strain <-
-      eucast_breakpoints(result_summary_strain, species)
+    result_summary_strain <- clsi_breakpoints(result_summary_strain,separator = " - ",
+                                                species = "Acinetobacter",
+                                                MIC.column = 2,
+                                                ATB.column = 1)
     results_by_strain[[n]] <- result_summary_strain
     names(results_by_strain)[n] <- list_of_strains[n]
     results_by_strain[[n]] <- result_summary_strain
@@ -79,7 +81,10 @@ summary_MIC_inhib <- function(inhib_data_list,
     abbreviation_to_full_atb_name(result_summary_final[, 2])
   result_summary_final <-
     result_summary_final[order(result_summary_final[, 1], result_summary_final[, 2]),]
-  result_summary_final <- eucast_breakpoints(result_summary_final,"Acinetobacter",4,2)
+  result_summary_final <- clsi_breakpoints(result_summary_final,separator = " - ",
+                                              species = "Acinetobacter",
+                                              MIC.column = 4,
+                                              ATB.column = 2)
   results <-
     list(result_summary = result_summary_final,
          result_summary_by_strain = results_by_strain)
