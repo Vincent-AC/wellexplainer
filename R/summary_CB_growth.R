@@ -66,14 +66,31 @@ summary_CB_growth <- function(growth_data_list,
       abbreviation_to_full_atb_name(result_summary_strain[, 2])#remove abbreviations of atb names
     result_summary_strain <-
       result_summary_strain[order(result_summary_strain[, 1]),]
-
+    result_summary_strain <- CB_clsi_breakpoints(result_summary_strain,
+                                              species = "Acinetobacter",
+                                              MIC.A.column = 3,
+                                              MIC.B.column = 4,
+                                              FICI.conc.A.column=6,
+                                              FICI.conc.B.column=7,
+                                              ATB.A.column = 1,
+                                              ATB.B.column = 2)
     results_by_strain[[n]] <- result_summary_strain
     names(results_by_strain)[n] <- list_of_strains[n]
   }
   result_summary_final[, 2] <-
     abbreviation_to_full_atb_name(result_summary_final[, 2])
+  result_summary_final[, 3] <-
+    abbreviation_to_full_atb_name(result_summary_final[, 3])
   result_summary_final <-
-    result_summary_final[order(result_summary_final[, 1], result_summary_final[, 2]),]
+    result_summary_final[order(result_summary_final[, 1], result_summary_final[, 2],result_summary_final[, 3]),]
+  result_summary_final <- CB_clsi_breakpoints(result_summary_final,
+                                           species = "Acinetobacter",
+                                           MIC.A.column = 4,
+                                           MIC.B.column = 5,
+                                           FICI.conc.A.column=7,
+                                           FICI.conc.B.column=8,
+                                           ATB.A.column = 2,
+                                           ATB.B.column = 3)
 
   results <-
     list(result_summary = result_summary_final,

@@ -17,7 +17,7 @@ is available. Defaults to "Acinetobacter"}
 }
 \description{
 Given OD MIC data processed through calculate_MIC_OD_inhib() function creates
-a data.frame with the MIC for each row and the row identifier (first element 
+a data.frame with the MIC for each row and the row identifier (first element
 returned) and a list of data.frames splitting the first data.frames by strain
 (second element returned)
 }

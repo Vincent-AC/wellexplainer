@@ -23,11 +23,12 @@ clsi_breakpoints <-
            ATB.column = 1) {
     if (species == "Acinetobacter")
     {
-      CLSI.sensitivity <- NULL
+      
       result <- MIC.table
       result[, (length(MIC.table) + 1)] <- "a"
       for (i in 1:nrow(MIC.table))
       {
+        CLSI.sensitivity <- NULL
         if (sum(clsi.breakpoints.acinetobacter[, 1] == MIC.table[i, ATB.column]) == 0)
         {
           result[i, (length(MIC.table) + 1)] <-
@@ -47,7 +48,8 @@ clsi_breakpoints <-
               grepl("<=", MIC.value[j]),
               grepl(">", MIC.value[j]),
               grepl("Positive control problem", MIC.value[j]),
-              grepl("Negative control problem", MIC.value[j])
+              grepl("Negative control problem", MIC.value[j]),
+              is.na(MIC.value[j])
             ) > 0)
             {
               CLSI.sensitivity[j] <- "No MIC value"
@@ -57,7 +59,8 @@ clsi_breakpoints <-
               grepl("<=", MIC.value[j]),
               grepl(">", MIC.value[j]),
               grepl("Positive control problem", MIC.value[j]),
-              grepl("Negative control problem", MIC.value[j])
+              grepl("Negative control problem", MIC.value[j]),
+              is.na(MIC.value[j])
             ) == 0)
             {
               temp.MIC <- 0

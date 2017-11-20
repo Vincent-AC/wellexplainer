@@ -1,10 +1,10 @@
 #' Summarize MIC results
 #'
 #' Given OD MIC data processed through calculate_MIC_OD_inhib() function creates
-#' a data.frame with the MIC for each row and the row identifier (first element 
+#' a data.frame with the MIC for each row and the row identifier (first element
 #' returned) and a list of data.frames splitting the first data.frames by strain
 #' (second element returned)
-#' 
+#'
 #' @param inhib_data_list A list of data.frames returned by the calculate_MIC_OD_inhib() function
 #' @param number_of_lines Number of lines used by plate. Defaults to 8
 #' @param species Species of the studied bacteria, for the moment only "Acinetobacter"
@@ -31,7 +31,7 @@ summary_MIC_inhib <- function(inhib_data_list,
       inhib_data[, "ATB"]
     result_summary[(i * number_of_lines - (number_of_lines - 1)):(i * number_of_lines), 4] <-
       inhib_data[, "MIC"]
-    
+
   }
   result_summary_final <- result_summary
   for (m in 1:nrow(result_summary))
@@ -41,10 +41,10 @@ summary_MIC_inhib <- function(inhib_data_list,
     result_summary_final[m, 3] <-
       as.numeric(strsplit(result_summary[, 2], "-")[[m]][2])
   }
-  
+
   names(result_summary_final) <-
     c("Strain", "ATB", "Replicate", "MIC")
-  
+
   list_of_strains <- unique(result_summary_final$"Strain")
   list_of_atb <- unique(result_summary_final$"ATB")
   results_by_strain <- list()

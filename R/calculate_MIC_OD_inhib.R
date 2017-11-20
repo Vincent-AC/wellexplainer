@@ -70,7 +70,7 @@ calculate_MIC_OD_inhib <-
                  as.numeric(colnames(inhib_data[l,-c(1, (positive_control_col+1):ncol(inhib_data))])[which(inhib_data[l,-c(1, (positive_control_col+1):ncol(inhib_data))] >=
                                                                                                        0.9)])
                inhib_data[l, "MIC"] <-
-                 min(rev(geomSeries(2, inhib_data[l, "Max.Conc"]))[columns_without_growth])
+                 min(geomSeries(2, inhib_data[l, "Max.Conc"])[columns_without_growth])
              }
            }
            inhib_data_list[[i]] <- inhib_data

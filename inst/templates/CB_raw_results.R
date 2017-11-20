@@ -61,6 +61,7 @@ for (i in 1:length(results_by_strain))
     header = F,
     summary = F,
     digit.separator = " ",
+    digits=2,
     no.space = TRUE,
     notes = c("Concentrations en µg/mL"),
     rownames = F,

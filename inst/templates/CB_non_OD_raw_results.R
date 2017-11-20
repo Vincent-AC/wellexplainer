@@ -96,7 +96,7 @@ growth <- calculate_CB_OD_growth(raw_results_list,
 
 plots <- plot_CB_OD(growth)
 
-summary <- summary_CB_inhib(growth,
+summary <- summary_CB_growth(growth,
                             number_of_lines = params$number_of_lines,
                             species = params$species)
 
@@ -110,6 +110,7 @@ for (i in 1:length(results_by_strain))
     header = F,
     summary = F,
     digit.separator = " ",
+    digits = 2,
     no.space = TRUE,
     notes = c("Concentrations en µg/mL"),
     rownames = F,
