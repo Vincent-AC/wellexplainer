@@ -35,9 +35,9 @@ summary_CB_growth <- function(growth_data_list,
     result_summary[i, 6] <-
       min(growth_data[-1,"min.FICI"],na.rm=T)
     result_summary[i, 7] <-
-      growth_data[(growth_data[-1,"min.FICI"]==min(growth_data[-1,"min.FICI"],na.rm=T)),"MIC.A"][1]
+      growth_data[(growth_data[,"min.FICI"]==min(growth_data[-1,"min.FICI"],na.rm=T)),"MIC.A"][1]
     result_summary[i, 8] <-
-      growth_data[(growth_data[-1,"min.FICI"]==min(growth_data[-1,"min.FICI"],na.rm=T)),"MIC.B"][1]
+      growth_data[(growth_data[,"min.FICI"]==min(growth_data[-1,"min.FICI"],na.rm=T)),"MIC.B"][1]
 
   }
   result_summary_final <- result_summary
